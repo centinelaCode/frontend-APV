@@ -4,9 +4,9 @@ const Login = () => {
   return (
     <>      
       <div>
-        <h1 className="text-indigo-600 font-blank text-6xl">Inicia Sesión y Administra tus <span className="text-black">Pacientes</span></h1>
+        <h1 className="text-indigo-600 font-blank text-6xl font-bold">Inicia Sesión y Administra tus <span className="text-black font-bold">Pacientes</span></h1>
       </div>
-      <div>
+      <div className="mt-20 md:mt-5 shadow-lg px-5 py-5 rounded-xl bg-white">
         <form>
           <div className="my-5">
             <label
