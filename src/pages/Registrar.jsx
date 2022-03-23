@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Alerta from '../components/Alerta';
 
 const Registrar = () => {
   // states
@@ -8,30 +9,37 @@ const Registrar = () => {
   const [password, setPassword] = useState('');
   const [repetirPassword, setRepetirPassword] = useState('');
 
+  const [alerta, setAlerta] = useState({});
+
   // funciones
   const handleSubmit = e => {
     e.preventDefault();
 
     // validamos que no existan campos vacios
     if([nombre, email, password, repetirPassword].includes('')) {
-      console.log('Hay campos vacios');
+      setAlerta({msg: 'Hay campos vacios', error: true});
       return;
     } 
     
     // validamos que los password sean iguales
     if(password !== repetirPassword){
-      console.log('Los password no son iguales');
+      setAlerta({msg: 'Los password no son iguales', error: true});      
       return
     }
 
     if(password.length < 6) {
-      console.log(password.length,'El password debe ser de al menos 6 caracteres');
-      console.log(repetirPassword.length)
+      setAlerta({msg: 'El password debe ser de al menos 6 caracteres', error: true});       
       return
     }
 
-    console.log('despues if')
+    // Si pasa las validaciones ocultamos la alerta
+    setAlerta({});
+
+    // Crear el usuario usando la API
   }
+
+  const {msg} = alerta;
+
 
   return (    
     <>
@@ -39,6 +47,13 @@ const Registrar = () => {
         <h1 className="text-indigo-600 font-blank text-6xl font-bold">Crea tu cuenta y Administra tus <span className="text-black font-bold">Pacientes</span></h1>
       </div>
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
+
+        {
+          msg && <Alerta 
+            alerta={alerta}
+          />
+        }
+
         <form
           onSubmit={handleSubmit}
         >
