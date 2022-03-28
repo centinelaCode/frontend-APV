@@ -1,7 +1,9 @@
 import {useState, useEffect} from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+
 import Alerta from '../components/Alerta';
+import clienteAxios from '../config/axios';
 
 const ConfirmarCuenta = () => {
   // state para la alerta
@@ -18,10 +20,10 @@ const ConfirmarCuenta = () => {
   useEffect(() => {
     const confirmarCuenta = async () => {
       try {
-        const url = `${import.meta.env.VITE_BACKEND_URL}/api/veterinarios/confirmar/${id}`;
+        const url = `/veterinarios/confirmar/${id}`;
         // console.log(url);
 
-        const { data } = await axios.get(url);        
+        const { data } = await clienteAxios.get(url);        
         // console.log(data);
         setCuentaConfirmada(true);
         setAlerta({
